@@ -7,8 +7,10 @@ namespace GC_MidtermProject
     abstract class Payment
     {
 
+        public Payment() { }
+
         //method
-        public abstract double ChangeBack()
+        public abstract double ChangeBack();
 
     }
 }

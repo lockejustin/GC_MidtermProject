@@ -12,7 +12,7 @@ namespace GC_MidtermProject
         SoftGood,
 
     }
-    
+
     class Product
     {
         //Properties
@@ -20,18 +20,32 @@ namespace GC_MidtermProject
         public Category Category { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+        public int Quantity { get; set; }
+
         //End Properties
 
         //Constructors
-        public Product (string name, Category category, string description, double price)
+        public Product(string name, Category category, string description, double price)
         {
             Name = name;
             Category = category;
             Description = description;
             Price = price;
+            Quantity = 0;
         }
         //End Constructors
 
+        public void PrintList() 
+        {
+            if (Quantity == 0)
+            {
+                Console.WriteLine($"{Name} {Category} {Description} {Price}");
+            }
+            else
+            {
+                Console.WriteLine($"{Name} {Quantity} {Price}");
+            }
 
+        }
     }
 }

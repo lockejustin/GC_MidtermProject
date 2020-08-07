@@ -10,44 +10,118 @@ namespace GC_MidtermProject
     {
         static void Main(string[] args)
         {
-
             List<Product> products = new List<Product>() { };
-            products.Add(new Product("Cheese", Category.Food, "Delicious Wisonsin Cheddar", 4.99));
-            products.Add(new Product("Milk", Category.Drink, "2% Milk - Super Fresh!", 3.49));
-            products.Add(new Product("Beef", Category.Food, "1 lb 100% Grass Fed Beef", 6.99));
-            products.Add(new Product("Television", Category.HardGood, "85\" 8k 5G Enabled with 10 free Nic Cage movies", 4999.00));
-            products.Add(new Product("Stuffed Penguin", Category.HardGood, "Stuffed Friend Always Dressed for the Occasion", 14.99));
-            products.Add(new Product("Polka Dot Rain Coat", Category.SoftGood, "Stay dry, in style!", 19.99));
 
-
-            StreamWriter writer = new StreamWriter("../../../ProductList.txt");
-
-            foreach (Product product in products)
+            StreamReader reader = new StreamReader("../../../ProductList.txt");
+            string line = reader.ReadLine();
+            while (line != null)
             {
-                writer.WriteLine(product);
+                string[] productProperty = line.Split('|');
+                products.Add(new Product(productProperty[0], (Category) Enum.Parse(typeof(Category), productProperty[1]), productProperty[2], double.Parse(productProperty[3])));
+                line = reader.ReadLine();
             }
-            writer.Close();
-
+            reader.Close();
+            
             List<Product> shoppingCart = new List<Product>();
 
+            shoppingCart = ShoppingMenu(products);
+
+            CheckOut(shoppingCart);
 
         }
-        public static int ShoppingMenu(List<Product> inventory, List<Product>shoppingCart)
+        
+        public static void CheckOut(List<Product> shoppingList)
         {
-            
-                for (int index = 0; index < inventory.Count; index++)
+            string[] checkoutOptions = { "Cash", "Credit", "Check" };
+            double subTotal = 0;
+            double taxRate = .06;
+            double taxTotal = 0;
+
+            foreach (var product in shoppingList)
+            {
+                subTotal += product.Price * product.Quantity;
+            }
+
+            taxTotal = subTotal * taxRate;
+
+            Console.WriteLine($"Subtotal = ${subTotal}");
+            Console.WriteLine($"Tax (6%) = ${taxTotal}");
+            Console.WriteLine($"Grand Total = ${subTotal + taxTotal}");
+
+            Console.WriteLine("How would you like to pay?");
+
+            for (int i = 0; i < checkoutOptions.Length; i++)
+            {
+                Console.WriteLine($"{i+1}) {checkoutOptions[i]}");
+            }
+
+            int paymentChoice = int.Parse(Console.ReadLine());
+
+            if (paymentChoice == 1)
+            {
+                
+                Console.WriteLine("How much money are you giving us?");
+                double tenderedAmount = double.Parse(Console.ReadLine());
+
+                Cash cashPayment = new Cash(tenderedAmount,(subTotal+taxTotal));
+                double change = cashPayment.ChangeBack();
+
+                Console.WriteLine($"Your change is ${change}.  Thanks for shopping!");
+            }
+            else if (paymentChoice == 2)
+            {
+                CreditCard creditPayment = new CreditCard();
+                //double change = 
+                creditPayment.ChangeBack();
+            }
+
+        }
+
+        
+        public static List<Product> ShoppingMenu(List<Product> inventory)//, List<Product> shoppingCart)
+        {
+            int shoppingcartIndex = 0;
+            List<Product> shoppingCart = new List<Product>() { };
+
+            while (true)
+            {
+                
+                for (int index = 0; index < inventory.Count; index++)  //displays all products available to purchase
                 {
-                    Console.WriteLine($"{(index + 1)} {inventory[index]}");
+                    Console.Write($"{index + 1}) ");
+                    inventory[index].PrintList();
                 }
 
-                Console.WriteLine("Which item would you like to add to your cart?");
+                Console.WriteLine("Which item would you like to add to your cart?");  //finds index in inventory of what product we want to purchase
                 int itemselection = int.Parse(Console.ReadLine()) - 1;
-                shoppingCart.Add(inventory[itemselection]);
 
-                Console.WriteLine($"How many {inventory[itemselection]}(s) would you like?");
+                Console.WriteLine($"How many {inventory[itemselection].Name}(s) would you like?");  //asks user for how much of said product they'd like to buy
                 int quantity = int.Parse(Console.ReadLine());
-                return quantity;
 
+                
+                shoppingCart.Add(inventory[itemselection]);  //adds selected product to shopping cart
+
+                shoppingCart[shoppingcartIndex].Quantity = quantity;  //updates qty of product in shopping cart
+
+                shoppingcartIndex++;  //iterates shopping cart index
+
+                Console.Write("Would you like to purchase another item? (y/n) ");
+                string input = Console.ReadLine().ToLower();
+
+                while (input != "n" && input != "y")
+                {
+                    Console.Write("Invalid response.  Please enter (y/n) ");
+                    input = Console.ReadLine().ToLower();
+                }
+
+                if (input == "n")
+                {
+                    Console.Clear();
+                    break;
+                }
+                Console.Clear();
+            }
+            return shoppingCart;
         }
     }
 }
