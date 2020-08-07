@@ -1,0 +1,12 @@
+Cheese|Food|Delicious Wisonsin Cheddar|4.99
+Milk|Drink|2% Milk - Super Fresh!|3.49
+Beef|Food|1 lb 100% Grass Fed Beef|6.99
+Television|HardGood|85" 8k 5G Enabled with 10 free Nic Cage movies|4999
+Stuffed Penguin|HardGood|Stuffed Friend Always Dressed for the Occasion|14.99
+Polka Dot Rain Coat|SoftGood|Stay dry, in style!|19.99
+Nachos|Food|Delicious Snack|2.99
+Refrigerator|HardGood|Keeps food cold|699.99
+Better Refrigerator|HardGood|Keeps food cold, but better|1999.99
+Shoes|SoftGood|Nike|59.99
+Gaming Laptop|HardGood|Outdated as soon as you buy it|1899.99
+Boxers|SoftGood|Fruit of Hanes - 3pk|10
