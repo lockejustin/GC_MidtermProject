@@ -6,7 +6,10 @@ namespace GC_MidtermProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("I've got a bad feeling about this.");
+
+            Console.WriteLine("I've got a bad feeling about this, said Justin");
+
+
         }
     }
 }
