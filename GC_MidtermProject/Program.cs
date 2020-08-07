@@ -6,7 +6,7 @@ namespace GC_MidtermProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Ramez");
         }
     }
 }
