@@ -42,7 +42,6 @@ namespace GC_MidtermProject
                 {
                     break;
                 }
-               
 
             Console.Clear();
             }
@@ -80,8 +79,14 @@ namespace GC_MidtermProject
             {
                 
                 Console.WriteLine("How much money are you giving us?");
-                double tenderedAmount = double.Parse(Console.ReadLine());
 
+                double tenderedAmount = 0;
+
+                while (!double.TryParse(Console.ReadLine(), out tenderedAmount))
+                {
+                    Console.WriteLine("Please enter a valid dollar amount");
+                }
+                
                 Cash cashPayment = new Cash(tenderedAmount,(subTotal+taxTotal));
                 double change = cashPayment.ChangeBack();       //cash receipt
 
@@ -94,7 +99,6 @@ namespace GC_MidtermProject
             else if (paymentChoice == 2)
             {
                 CreditCard creditPayment = new CreditCard();
-                //double change = 
                 creditPayment.ChangeBack();
                 creditPayment.Receip(shoppingList,subTotal,taxTotal);       //credit receipt
             }
@@ -102,6 +106,7 @@ namespace GC_MidtermProject
             {
                 Check check = new Check();
                 check.ChangeBack();
+                check.Receip(shoppingList, subTotal, taxTotal);  //check receipt
             }
 
         }
@@ -111,6 +116,9 @@ namespace GC_MidtermProject
         {
             int shoppingcartIndex = 0;
             List<Product> shoppingCart = new List<Product>() { };
+
+            string input2 = "";
+
 
             while (true)
             {
@@ -122,15 +130,75 @@ namespace GC_MidtermProject
                 }
 
                 Console.WriteLine("Which item would you like to add to your cart?");  //finds index in inventory of what product we want to purchase
-                int itemselection = int.Parse(Console.ReadLine()) - 1;
+                int itemselection = 0; //int.Parse(Console.ReadLine()) - 1;
+
+                while (true) //validation for menu entry
+                {
+                    input2 = Console.ReadLine();
+                    try
+                    {
+                        itemselection = int.Parse(input2);
+                        if (itemselection > 0 && itemselection <= inventory.Count)
+                        {
+                            itemselection = itemselection - 1;
+                            break;
+                        }
+                        else
+                        {
+                            Console.Write($"That is not a valid choice.  Please input a number between 1 and {inventory.Count} ");
+                            continue;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("That choice wasn't a number.  Please try again.");
+                    }
+                }
 
                 Console.WriteLine($"How many {inventory[itemselection].Name}(s) would you like?");  //asks user for how much of said product they'd like to buy
-                int quantity = int.Parse(Console.ReadLine());
 
                 
+                int quantity = 0; 
+
+                while (true) //validation for quantity entry
+                {
+                    input2 = Console.ReadLine();
+                    try
+                    {
+                        quantity = int.Parse(input2);
+                        if (quantity > 0 )
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"That is not a valid choice.  Please input a quantity greater than 0.");
+                            continue;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("That choice wasn't a number.  Please try again.");
+                    }
+                }
+
+
                 shoppingCart.Add(inventory[itemselection]);  //adds selected product to shopping cart
 
                 shoppingCart[shoppingcartIndex].Quantity = quantity;  //updates qty of product in shopping cart
+
+                if (shoppingCart[shoppingcartIndex].Name.Length > 10)  //truncates name if longer than 10 characters
+                {
+                    shoppingCart[shoppingcartIndex].Name = shoppingCart[shoppingcartIndex].Name.Substring(0, 10);
+                }
+                else if (shoppingCart[shoppingcartIndex].Name.Length <= 10)
+                {
+                    for (int i = shoppingCart[shoppingcartIndex].Name.Length; i < 10; i++)
+                    {
+                        shoppingCart[shoppingcartIndex].Name += " ";
+                    }
+                    
+                }
                 
                 shoppingCart[shoppingcartIndex].PrintList();
                 

@@ -32,6 +32,7 @@ namespace GC_MidtermProject
             Description = description;
             Price = price;
             Quantity = 0;
+
         }
         //End Constructors
 

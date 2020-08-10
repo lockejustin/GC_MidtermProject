@@ -21,17 +21,16 @@ namespace GC_MidtermProject
         //method
         public override double ChangeBack()
         {
-            Console.Write("Please Enter your routing number: ");
+            Console.Write("Please Enter your 7-digit routing number: ");
             RoutingNumber = int.Parse(Console.ReadLine());
             while (true)
             {
 
-
-                if (RoutingNumber > 999999 && RoutingNumber < 10000000)
+                if (RoutingNumber > 999999 && RoutingNumber <= 9999999)
                 {
-                    Console.Write("Please Enter your account number: ");
+                    Console.Write("Please Enter your 8-digit account number: ");
                     AccountNumber = double.Parse(Console.ReadLine());
-                    if (AccountNumber > 99999999 && AccountNumber < 10000000000000)
+                    if (AccountNumber > 9999999 && AccountNumber <= 99999999)
                     {
 
                         Console.WriteLine("\nPayment Processes - Thank you for using our service");
@@ -39,7 +38,7 @@ namespace GC_MidtermProject
                     }
                     else
                     {
-                        Console.Write("invalid account number - Please try again");
+                        Console.Write("Invalid account number - Please try again");
                         AccountNumber = double.Parse(Console.ReadLine());
                     }
 
@@ -52,5 +51,12 @@ namespace GC_MidtermProject
             }
             return -1;
         }
+        public override void Receip(List<Product> shoppingList, double subTotal, double taxTotal)
+        {
+            base.Receip(shoppingList, subTotal, taxTotal);
+            Console.WriteLine("Payment Type: Check");
+
+        }
+
     }
 }

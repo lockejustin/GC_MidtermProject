@@ -21,6 +21,13 @@ namespace GC_MidtermProject
         //Method
         public override double ChangeBack()
         {
+            while (TenderedAmount < TotalPrice)
+            {
+                Console.WriteLine($"That is not enough money.  You are short by ${(TotalPrice - TenderedAmount):N2}.");
+                Console.WriteLine($"Please give us an amount equal to ${TotalPrice:N2} or higher.");
+                TenderedAmount = double.Parse(Console.ReadLine());
+            }
+            
             double ChangeBack = (TenderedAmount - TotalPrice);
             
             return ChangeBack;
