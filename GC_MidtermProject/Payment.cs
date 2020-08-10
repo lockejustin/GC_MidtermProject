@@ -24,15 +24,15 @@ namespace GC_MidtermProject
                 double total = shoppingList[i].Quantity * shoppingList[i].Price;
                 string lineTotal = total.ToString();
 
-                if (price.Length <= 10)  //truncates name if longer than 10 characters
-                {
-                    for (int j = price.Length; j < 10; j++)
-                    {
-                        price += " ";
-                    }
-                }
+                //if (price.Length <= 15)  //truncates name if longer than 10 characters
+                //{
+                //    for (int j = price.Length; j < 10; j++)
+                //    {
+                //        price += " ";
+                //    }
+                //}
 
-                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t${price}\t${lineTotal}");                
+                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t${price}\t\t${lineTotal}");                
             }
             Console.WriteLine($"The Total = ${(subTotal + taxTotal):N2}");
         }

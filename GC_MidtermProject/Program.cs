@@ -15,29 +15,30 @@ namespace GC_MidtermProject
             while (true)
             {
 
-            
-            List<Product> products = new List<Product>() { };
 
-            StreamReader reader = new StreamReader("../../../ProductList.txt");
-            string line = reader.ReadLine();
-            while (line != null)
-            {
-                string[] productProperty = line.Split('|');
-                products.Add(new Product(productProperty[0], (Category)Enum.Parse(typeof(Category), productProperty[1]), productProperty[2], double.Parse(productProperty[3]), int.Parse(productProperty[4])));
-                line = reader.ReadLine();
-            }
-            reader.Close();
+                List<Product> products = new List<Product>() { };
+
+                StreamReader reader = new StreamReader("../../../ProductList.txt");
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    string[] productProperty = line.Split('|');
+                    products.Add(new Product(productProperty[0], productProperty[1], productProperty[2], double.Parse(productProperty[3]), int.Parse(productProperty[4])));
+                    line = reader.ReadLine();
+                }
+                reader.Close();
 
 
-            Console.WriteLine("Press 0: For user");
-            Console.WriteLine("Press 1: For Admin");
+                Console.WriteLine("Press 0: For user");
+                Console.WriteLine("Press 1: For Admin");
+                Console.WriteLine("Press 2: To exit");
 
-            int choice = -1;
+                int choice = -1;
 
-            while (!int.TryParse(Console.ReadLine(), out choice))
-            {
-                Console.WriteLine("Invalid Entry-Please enter 0 or 1");
-            }
+                while (!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    Console.WriteLine("Invalid Entry-Please enter 0 or 1 or 2");
+                }
 
                 if (choice == 0)
                 {
@@ -72,12 +73,20 @@ namespace GC_MidtermProject
 
 
                         StreamWriter writer = new StreamWriter("../../../ProductList.txt");
-                        Console.Write("Please enter a name");
+                        Console.WriteLine("Please enter a name");
                         string name = Console.ReadLine();
-                        Console.Write("Please enter a description");
+                        for (int i = name.Length; i < 15; i++)
+                        {
+                            name += " ";
+                        }
+                        Console.WriteLine("Please enter a description");
                         string description = Console.ReadLine();
-                        Console.Write("Please enter a category");
-                        Console.WriteLine($"1 for {Category.Drink} 2 for {Category.Food} 3 for {Category.HardGood} 4 for {Category.SoftGood}");
+                        for (int i = description.Length; i < 15; i++)
+                        {
+                            description += " ";
+                        }
+                        Console.WriteLine("Please enter a category");
+                        Console.WriteLine($"1 for Drink 2 for Food 3 for HardGood 4 for SoftGood");
 
                         string _category = "";
                         int category = -1;
@@ -90,12 +99,12 @@ namespace GC_MidtermProject
                             }
                             if (category == 1)
                             {
-                                _category = "Drink";
+                                _category = "Drink   ";
                                 break;
                             }
                             else if (category == 2)
                             {
-                                _category = "Food";
+                                _category = "Food    ";
                                 break;
                             }
                             else if (category == 3)
@@ -113,21 +122,26 @@ namespace GC_MidtermProject
                                 Console.WriteLine("Invalid Entry - Please try again");
                             }
                         }
-                        Console.Write("Please enter a price");
+                        Console.WriteLine("Please enter a price");
                         double price = 0;// double.Parse(Console.ReadLine());
                         while (!double.TryParse(Console.ReadLine(), out price))
                         {
                             Console.WriteLine("Please enter a numerical value");
                         }
 
-
+                        Console.WriteLine($"How many you want to add to inventory?");
+                        int Inventory = 0;// double.Parse(Console.ReadLine());
+                        while (!int.TryParse(Console.ReadLine(), out Inventory))
+                        {
+                            Console.WriteLine("Please enter a numerical value");
+                        }
 
                         //Console.ReadKey();
-                        products.Add(new Product(name, (Category)Enum.Parse(typeof(Category), _category), description, price));
+                        products.Add(new Product(name, _category, description, price, Inventory));
 
                         foreach (Product product in products)
                         {
-                            writer.WriteLine($"{product.Name}|{product.Category}|{product.Description}|{product.Price}");
+                            writer.WriteLine($"{product.Name}|{product.Category}|{product.Description}|{product.Price}|{product.Inventory}");
                         }
                         writer.Close();
 
@@ -142,6 +156,15 @@ namespace GC_MidtermProject
                             break;
                         }
                     }
+                }
+                else if (choice == 2)
+                {
+                    Console.WriteLine("Thank you - Bye!");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid - Entry");
                 }
 
 
@@ -163,6 +186,10 @@ namespace GC_MidtermProject
 
             taxTotal = subTotal * taxRate;
 
+            for (int i = 0; i < shoppingList.Count; i++)
+            {
+                shoppingList[i].PrintLineTotal();
+            }
             Console.WriteLine($"Subtotal = ${subTotal:N2}");
             Console.WriteLine($"Tax (6%) = ${taxTotal:N2}");
             Console.WriteLine($"Grand Total = ${(subTotal + taxTotal):N2}");
@@ -177,7 +204,7 @@ namespace GC_MidtermProject
             int paymentChoice = 0;//int.Parse(Console.ReadLine());
             while (true)
             {
-                while(!int.TryParse(Console.ReadLine(), out paymentChoice))
+                while (!int.TryParse(Console.ReadLine(), out paymentChoice))
                 {
                     Console.WriteLine("Please enter a numerical value");
                 }
@@ -266,7 +293,7 @@ namespace GC_MidtermProject
                     }
                 }
 
-                Console.WriteLine($"How many {inventory[itemselection].Name}(s) would you like?");  //asks user for how much of said product they'd like to buy
+                Console.WriteLine($"How many would you like?");  //asks user for how much of said product they'd like to buy
 
 
                 int quantity = 0;
@@ -277,15 +304,17 @@ namespace GC_MidtermProject
                     try
                     {
                         quantity = int.Parse(input2);
-                        //if (quantity>inventory[itemselection].Inventory)
-                        //{
-                        //    Console.WriteLine("Not enough in stock");
-                        //}
-                        if (quantity > 0)
+                        if (quantity > inventory[itemselection].Inventory)
                         {
+                            Console.WriteLine($"Not enough in stock - please enter a quantity less than {inventory[itemselection].Inventory}");
+                            continue;
+                        }
+                        else if (quantity > 0)
+                        {
+                            inventory[itemselection].Inventory -= quantity;
                             break;
                         }
-                        
+
                         else
                         {
                             Console.WriteLine($"That is not a valid choice.  Please input a quantity greater than 0.");
@@ -303,20 +332,7 @@ namespace GC_MidtermProject
 
                 shoppingCart[shoppingcartIndex].Quantity = quantity;  //updates qty of product in shopping cart
 
-                if (shoppingCart[shoppingcartIndex].Name.Length > 10)  //truncates name if longer than 10 characters
-                {
-                    shoppingCart[shoppingcartIndex].Name = shoppingCart[shoppingcartIndex].Name.Substring(0, 10);
-                }
-                else if (shoppingCart[shoppingcartIndex].Name.Length <= 10)
-                {
-                    for (int i = shoppingCart[shoppingcartIndex].Name.Length; i < 10; i++)
-                    {
-                        shoppingCart[shoppingcartIndex].Name += " ";
-                    }
-
-                }
-
-                shoppingCart[shoppingcartIndex].PrintList();
+                shoppingCart[shoppingcartIndex].PrintLineTotal();
 
                 shoppingcartIndex++;  //iterates shopping cart index
 
@@ -338,7 +354,14 @@ namespace GC_MidtermProject
                 }
                 Console.Clear();
             }
+            StreamWriter writer = new StreamWriter("../../../ProductList.txt");
+            foreach (Product product in inventory)
+            {
 
+                writer.WriteLine($"{product.Name}|{product.Category}|{product.Description}|{product.Price}|{product.Inventory}");
+            }
+
+            writer.Close();
 
             return shoppingCart;
 

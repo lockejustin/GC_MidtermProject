@@ -1,16 +1,19 @@
-Cheese|Food|Delicious Wisonsin Cheddar|4.99|100
-Milk|Drink|2% Milk - Super Fresh!|3.49|100
-Beef|Food|1 lb 100% Grass Fed Beef|6.99|100
-Television|HardGood|85" 8k 5G Enabled with 10 free Nic Cage movies|4999|100
-Stuffed Penguin|HardGood|Stuffed Friend Always Dressed for the Occasion|14.99|100
-Polka Dot Rain Coat|SoftGood|Stay dry, in style!|19.99|100
-Nachos|Food|Delicious Snack|2.99|100
-Refrigerator|HardGood|Keeps food cold|699.99|100
-Better Refrigerator|HardGood|Keeps food cold, but better|1999.99|100
-Shoes|SoftGood|Nike|59.99|100
-Gaming Laptop|HardGood|Outdated as soon as you buy it|1899.99|100
-Boxers|SoftGood|Fruit of Hanes - 3pk|10|100
-Shoes|HardGood|Addidas|59.99|100
-Gum|Food|Ice breaker|2.99|100
-Keyboard|HardGood|HP Key board|19.99|100
-Mouse|HardGood|HP mouse|9.99|100
+Cheese         |Food    |Cheddar        |4.99|31
+Milk           |Drink   |2% Milk        |3.49|35
+Beef           |Food    |1 lb           |6.99|98
+Television     |HardGood|85" 8k 5G      |4999|95
+Stuffed Penguin|HardGood|Stuffed animal |14.99|100
+Polka Dot      |SoftGood|Rain coat      |19.99|99
+Nachos         |Food    |Delicious Snack|2.99|100
+Refrigerator   |HardGood|Keeps food cold|699.99|100
+Shoes          |SoftGood|Nike           |59.99|90
+Gaming Lap     |HardGood|HP             |1899.99|87
+Boxers         |SoftGood|3pk            |10|100
+Shoes          |HardGood|Addidas        |59.99|99
+Gum            |Food    |Ice breaker    |2.99|98
+Keyboard       |HardGood|HP Key board   |19.99|100
+Mouse          |HardGood|HP mouse       |9.99|100
+Onion          |Food    |food           |0.99|50
+pizza          |Food    |pepproni       |9.99|88
+hot dog        |Food    |beef           |4.99|50
+couch          |HardGood|2 person       |699.99|3
