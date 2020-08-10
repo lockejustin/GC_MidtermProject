@@ -22,31 +22,64 @@ namespace GC_MidtermProject
         public override double ChangeBack()
         {
             Console.Write("Please Enter your 7-digit routing number: ");
-            RoutingNumber = int.Parse(Console.ReadLine());
+
             while (true)
             {
-
-                if (RoutingNumber > 999999 && RoutingNumber <= 9999999)
+                while (true)
                 {
-                    Console.Write("Please Enter your 8-digit account number: ");
-                    AccountNumber = double.Parse(Console.ReadLine());
-                    if (AccountNumber > 9999999 && AccountNumber <= 99999999)
-                    {
 
-                        Console.WriteLine("\nPayment Processes - Thank you for using our service");
+                    try
+                    {
+                        RoutingNumber = int.Parse(Console.ReadLine());
                         break;
                     }
-                    else
+                    catch
                     {
-                        Console.Write("Invalid account number - Please try again");
-                        AccountNumber = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Invalid entry - Please enter a numerical value");
+                        continue;
+                    }
+                }
+                if (RoutingNumber > 999999 && RoutingNumber <= 9999999)
+                {
+                    while (true)
+                    {
+
+                        while (true)
+                        {
+                            Console.Write("Please Enter your 8-digit account number: ");
+
+                            try
+                            {
+                                AccountNumber = double.Parse(Console.ReadLine());
+                                break;
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid entry - Please enter a numerical value");
+                                continue;
+                            }
+                        }
+
+                        if (AccountNumber > 9999999 && AccountNumber <= 99999999)
+                        {
+
+                            Console.WriteLine("\nPayment Processes - Thank you for using our service");
+                            return -1;
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("Invalid account number - Please try again");
+                            continue;
+                        }
+                        //
                     }
 
                 }
                 else
                 {
                     Console.WriteLine("Invalid - routing number, Please try again");
-                    RoutingNumber = int.Parse(Console.ReadLine());
+                    //RoutingNumber = int.Parse(Console.ReadLine());
                 }
             }
             return -1;

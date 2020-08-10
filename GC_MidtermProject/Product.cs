@@ -22,6 +22,8 @@ namespace GC_MidtermProject
         public double Price { get; set; }
         public int Quantity { get; set; }
 
+        public int Inventory { get; set; }
+
         //End Properties
 
         //Constructors
@@ -31,6 +33,16 @@ namespace GC_MidtermProject
             Category = category;
             Description = description;
             Price = price;
+            Quantity = 0;
+
+        }
+        public Product(string name, Category category, string description, double price, int Inventory)
+        {
+            Name = name;
+            Category = category;
+            Description = description;
+            Price = price;
+            this.Inventory = Inventory;
             Quantity = 0;
 
         }
