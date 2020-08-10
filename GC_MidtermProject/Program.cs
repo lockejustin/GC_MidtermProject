@@ -22,15 +22,30 @@ namespace GC_MidtermProject
                 line = reader.ReadLine();
             }
             reader.Close();
-            
-            List<Product> shoppingCart = new List<Product>();
 
-            shoppingCart = ShoppingMenu(products);
+            while (true)
+            {
+                List<Product> shoppingCart = new List<Product>();
 
-            CheckOut(shoppingCart);
+                shoppingCart = ShoppingMenu(products);
 
-    
+                CheckOut(shoppingCart);
 
+                Console.WriteLine("Would you like to place another order? Y/N");
+                string cont = Console.ReadLine().ToLower();
+                while (cont!="n" && cont != "y")
+                {
+                    Console.WriteLine("Invalid entry. please input Y/N");
+                    cont= Console.ReadLine().ToLower();
+                }
+                if (cont == "n")
+                {
+                    break;
+                }
+               
+
+            Console.Clear();
+            }
 
         }
         
@@ -68,11 +83,11 @@ namespace GC_MidtermProject
                 double tenderedAmount = double.Parse(Console.ReadLine());
 
                 Cash cashPayment = new Cash(tenderedAmount,(subTotal+taxTotal));
-                double change = cashPayment.ChangeBack();
+                double change = cashPayment.ChangeBack();       //cash receipt
 
                
 
-                Console.WriteLine($"Your change is ${change}.  Thanks for shopping!");
+                Console.WriteLine($"Your change is ${change:N2}.  Thanks for shopping!");
 
                 cashPayment.Receip(shoppingList, subTotal, taxTotal);
             }
@@ -81,6 +96,7 @@ namespace GC_MidtermProject
                 CreditCard creditPayment = new CreditCard();
                 //double change = 
                 creditPayment.ChangeBack();
+                creditPayment.Receip(shoppingList,subTotal,taxTotal);       //credit receipt
             }
             else if (paymentChoice == 3)
             {
@@ -141,6 +157,7 @@ namespace GC_MidtermProject
             return shoppingCart;
 
         }
+         
      
     }
 }

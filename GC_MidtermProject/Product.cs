@@ -39,11 +39,11 @@ namespace GC_MidtermProject
         {
             if (Quantity == 0)
             {
-                Console.WriteLine($"{Name} {Category} {Description} {Price}");
+                Console.WriteLine($"{Name} {Category} {Description} ${Price:N2}");
             }
             else
             {
-                Console.WriteLine($"Line Total: {Name} {Quantity} {Price} {(Quantity*Price):N2}");
+                Console.WriteLine($"Line Total: {Name} {Quantity} ${Price:N2} ${(Quantity*Price):N2}");
             }
 
         }

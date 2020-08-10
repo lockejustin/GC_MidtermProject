@@ -21,15 +21,16 @@ namespace GC_MidtermProject
         //Method
         public override double ChangeBack()
         {
-            double ChangeBack = TenderedAmount - TotalPrice;
+            double ChangeBack = (TenderedAmount - TotalPrice);
+            
             return ChangeBack;
         }
         public override void Receip(List<Product> shoppingList, double subTotal, double taxTotal)
         {
             base.Receip(shoppingList,subTotal,taxTotal);
             Console.WriteLine("Payment Type: Cash");
-            Console.WriteLine($"\nTendered Amount: {TenderedAmount}");
-            Console.WriteLine($"Your change: {ChangeBack()}");
+            Console.WriteLine($"Tendered Amount: ${TenderedAmount}");
+            Console.WriteLine($"Your change: ${ChangeBack():N2}");
 
         }
     }

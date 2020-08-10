@@ -19,9 +19,9 @@ namespace GC_MidtermProject
             for (int i =0;i<shoppingList.Count;i++)
             {
                 
-                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t\t{shoppingList[i].Price:N2}\t{(shoppingList[i].Quantity* shoppingList[i].Price):N2}");                
+                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t\t${shoppingList[i].Price:N2}\t${(shoppingList[i].Quantity* shoppingList[i].Price):N2}");                
             }
-            Console.Write($"The Total = {(subTotal + taxTotal):N2}");
+            Console.WriteLine($"The Total = ${(subTotal + taxTotal):N2}");
         }
 
     }
