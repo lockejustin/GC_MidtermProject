@@ -32,11 +32,11 @@ namespace GC_MidtermProject
             
             return ChangeBack;
         }
-        public override void Receip(List<Product> shoppingList, double subTotal, double taxTotal)
+        public override void Receipt(List<Product> shoppingList, double subTotal, double taxTotal)
         {
-            base.Receip(shoppingList,subTotal,taxTotal);
+            base.Receipt(shoppingList,subTotal,taxTotal);
             Console.WriteLine("Payment Type: Cash");
-            Console.WriteLine($"Tendered Amount: ${TenderedAmount}");
+            Console.WriteLine($"Tendered Amount: ${TenderedAmount:N2}");
             Console.WriteLine($"Your change: ${ChangeBack():N2}");
 
         }

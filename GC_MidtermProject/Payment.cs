@@ -12,9 +12,9 @@ namespace GC_MidtermProject
         //method
         public abstract double ChangeBack();
 
-        public virtual void Receip (List<Product> shoppingList,double subTotal, double taxTotal)
+        public virtual void Receipt (List<Product> shoppingList,double subTotal, double taxTotal)
         {
-            Console.WriteLine("Your receipt");
+            Console.WriteLine("RECEIPT");
             Console.WriteLine($"Item\tName\t\tQTY\tUnit Price\tLine Total");
 
 
@@ -24,15 +24,7 @@ namespace GC_MidtermProject
                 double total = shoppingList[i].Quantity * shoppingList[i].Price;
                 string lineTotal = total.ToString();
 
-                //if (price.Length <= 15)  //truncates name if longer than 10 characters
-                //{
-                //    for (int j = price.Length; j < 10; j++)
-                //    {
-                //        price += " ";
-                //    }
-                //}
-
-                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t${price}\t\t${lineTotal}");                
+                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t${string.Format("{0,10}",price.ToString())}\t${lineTotal}");                
             }
             Console.WriteLine($"The Total = ${(subTotal + taxTotal):N2}");
         }

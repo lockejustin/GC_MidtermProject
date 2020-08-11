@@ -56,7 +56,7 @@ namespace GC_MidtermProject
                     }
 
                     Console.WriteLine("Please enter your 3-digit CVV: ");
-                    int CVV = 0; //= int.Parse(Console.ReadLine());
+                    int CVV = 0; 
                     
 
                     while (true)
@@ -81,14 +81,13 @@ namespace GC_MidtermProject
                 else
                 {
                     Console.Write("Invalid Credit Card number entered.  Please try again: ");
-                    //CreditCardNumber = double.Parse(Console.ReadLine());
                     continue;
                 }
             }
         }
-        public override void Receip(List<Product> shoppingList, double subTotal, double taxTotal)
+        public override void Receipt(List<Product> shoppingList, double subTotal, double taxTotal)
         {
-            base.Receip(shoppingList, subTotal, taxTotal);
+            base.Receipt(shoppingList, subTotal, taxTotal);
             Console.WriteLine("Payment Type: Credit Card");
 
             string lastFour = CreditCardNumber.ToString().Substring(12, 4);

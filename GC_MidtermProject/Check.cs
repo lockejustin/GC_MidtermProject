@@ -63,7 +63,7 @@ namespace GC_MidtermProject
                         if (AccountNumber > 9999999 && AccountNumber <= 99999999)
                         {
 
-                            Console.WriteLine("\nPayment Processes - Thank you for using our service");
+                            Console.WriteLine("\nPayment Processed - Thank you for using our service");
                             return -1;
                         }
 
@@ -72,23 +72,21 @@ namespace GC_MidtermProject
                             Console.WriteLine("Invalid account number - Please try again");
                             continue;
                         }
-                        //
+                        
                     }
 
                 }
                 else
                 {
                     Console.WriteLine("Invalid - routing number, Please try again");
-                    //RoutingNumber = int.Parse(Console.ReadLine());
                 }
             }
             return -1;
         }
-        public override void Receip(List<Product> shoppingList, double subTotal, double taxTotal)
+        public override void Receipt(List<Product> shoppingList, double subTotal, double taxTotal)
         {
-            base.Receip(shoppingList, subTotal, taxTotal);
+            base.Receipt(shoppingList, subTotal, taxTotal);
             Console.WriteLine("Payment Type: Check");
-
         }
 
     }
