@@ -20,7 +20,7 @@ namespace GC_MidtermProject
         {
             while (true)
             {
-
+                #region Primary Requirements
                 List<Product> products = new List<Product>() { };
 
                 StreamReader reader = new StreamReader("../../../ProductList.txt");  //reads product list in from txt file
@@ -70,6 +70,9 @@ namespace GC_MidtermProject
                         Console.Clear();
                     }
                 }
+                #endregion
+                #region Extended Exercise
+
                 else if (choice == 1) //user chooses admin mode
                 {
                     while (true)
@@ -80,20 +83,9 @@ namespace GC_MidtermProject
 
                         string name = Console.ReadLine();
 
-                        //for (int i = name.Length; i < 15; i++)
-                        //{
-                        //    name += " ";
-                        //}
-
                         Console.Write("Please enter a description (max 15 characters): ");  //prompts for item description and ensures 15 character length
 
                         string description = Console.ReadLine();
-
-                        //for (int i = description.Length; i < 15; i++)
-                        //{
-                        //    description += " ";
-                        //}
-
 
                         Console.WriteLine("Please choose a category from the options below.");  //prompts for item category
                         Console.WriteLine($"1. Drink\n2. Food\n3. HardGood\n4. SoftGood");
@@ -149,15 +141,22 @@ namespace GC_MidtermProject
                             Console.WriteLine("Please enter a numerical value");
                         }
 
-                        products.Add(new Product(name, _category, description, price, Inventory));  //adds newly created product to the product list
+                        
+                        
+                        //adds newly created product to the product list
+                        products.Add(new Product(name, _category, description, price, Inventory));  
 
-                        StreamWriter writer = new StreamWriter("../../../ProductList.txt");  //writes new product to the txt file
+                        
+                        //writes new product to the txt file
+                        StreamWriter writer = new StreamWriter("../../../ProductList.txt");  
                         foreach (Product product in products)
                         {
                             writer.WriteLine($"{product.Name}|{product.Category}|{product.Description}|{product.Price}|{product.Inventory}");
                         }
                         writer.Close();
 
+                        
+                        
                         Console.WriteLine("Would you like to add another item (y/n)?");
                         string answer = Console.ReadLine().ToLower();
 
@@ -178,6 +177,7 @@ namespace GC_MidtermProject
 
                     }
                 }
+                #endregion
                 else if (choice == 2)
                 {
                     Console.WriteLine("Thank you - Bye!");
@@ -193,6 +193,8 @@ namespace GC_MidtermProject
 
         public static List<Product> ShoppingMenu(List<Product> inventory)
         {
+            #region Primary Functionality
+
             int shoppingcartIndex = 0;
             List<Product> shoppingCart = new List<Product>() { };
 
@@ -234,13 +236,16 @@ namespace GC_MidtermProject
                         Console.WriteLine("That choice wasn't a number.  Please try again.");
                     }
                 }
+                #endregion
 
+                #region Extra Functionality
                 Console.WriteLine($"How many would {inventory[itemselection].Name.Trim()}(s) would you like?  We have {inventory[itemselection].Inventory} in stock.");  //asks user for how much of said product they'd like to buy
 
 
                 int quantity = 0;
-
-                while (true) //validation for quantity entry
+                
+                //validation for quantity entry
+                while (true) 
                 {
                     input2 = Console.ReadLine();
                     try
@@ -251,6 +256,7 @@ namespace GC_MidtermProject
                             Console.WriteLine($"Not enough in stock - please enter a quantity less than {inventory[itemselection].Inventory}");
                             continue;
                         }
+                    #region Extra validation
                         else if (quantity > 0)
                         {
                             inventory[itemselection].Inventory -= quantity;
@@ -268,13 +274,13 @@ namespace GC_MidtermProject
                         Console.WriteLine("That choice wasn't a number.  Please try again.");
                     }
                 }
-
+                #endregion
 
                 shoppingCart.Add(inventory[itemselection]);  //adds selected product to shopping cart
 
                 shoppingCart[shoppingcartIndex].Quantity = quantity;  //updates qty of product in shopping cart
 
-                shoppingCart[shoppingcartIndex].PrintLineTotal();
+                shoppingCart[shoppingcartIndex].PrintLineTotal();  //print a line summary for the item added
 
                 shoppingcartIndex++;  //iterates shopping cart index
 
@@ -296,13 +302,16 @@ namespace GC_MidtermProject
                 }
                 Console.Clear();
             }
-            StreamWriter writer = new StreamWriter("../../../ProductList.txt");  //updates txt file with new inventory levels
+
+            //updates txt file with new inventory levels
+            StreamWriter writer = new StreamWriter("../../../ProductList.txt");  
             foreach (Product product in inventory)
             {
                 writer.WriteLine($"{product.Name}|{product.Category}|{product.Description}|{product.Price}|{product.Inventory}");
             }
 
             writer.Close();
+            #endregion
 
             return shoppingCart;
 
