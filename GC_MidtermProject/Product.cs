@@ -41,11 +41,12 @@ namespace GC_MidtermProject
 
         public void PrintList() 
         {
-            Console.WriteLine($"{Name}\t{Category}\t{Description}\t${String.Format("{0,7:N2}",Price.ToString())}\t{Inventory}");
+            int length = Name.Length;
+            Console.WriteLine($"{string.Format("{0,-15}",Name)}\t{Category}\t{string.Format("{0,-15}",Description)}\t${String.Format("{0,7:N2}",Price.ToString())}\t{Inventory}");
         }
         public void PrintLineTotal()
         {
-            Console.WriteLine($"Line Total: {Name} \t QTY: {Quantity} \t Unit Price: ${Price:N2} \t\t Total Price: ${(Quantity * Price):N2}");
+            Console.WriteLine($"Line Total: {string.Format("{0,-15}", Name)}\tQTY: {Quantity}\tUnit Price: ${Price:N2}\t\tTotal Price: ${(Quantity * Price):N2}");
         }
     }
 }

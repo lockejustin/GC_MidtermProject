@@ -24,7 +24,7 @@ namespace GC_MidtermProject
                 double total = shoppingList[i].Quantity * shoppingList[i].Price;
                 string lineTotal = total.ToString();
 
-                Console.WriteLine($"{i+1}\t{shoppingList[i].Name}\t{shoppingList[i].Quantity}\t${string.Format("{0,10}",price.ToString())}\t${lineTotal}");                
+                Console.WriteLine($"{i+1}\t{string.Format("{0,-15}",shoppingList[i].Name)}\t{shoppingList[i].Quantity}\t${string.Format("{0,10}",price.ToString())}\t${lineTotal}");                
             }
             Console.WriteLine($"The Total = ${(subTotal + taxTotal):N2}");
         }
